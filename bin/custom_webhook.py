@@ -45,20 +45,16 @@ if __name__ == "__main__":
     try:
         settings = json.loads(sys.stdin.read())
         url = settings['configuration'].get('url')
-        headers = json.loads(settings['configuration'].get('headers'))
-        hipchat_notify = settings['configuration'].get('hipchat_notify')
+        headers = json.loads(settings['configuration'].get('headers') or "{}")
         raw_data = settings['configuration'].get('raw_data')
-
-        body = settings.get('result') if raw_data else OrderedDict(
+        result = settings.get('result')
+        body = result if raw_data == "1" else OrderedDict(
             sid=settings.get('sid'),
             search_name=settings.get('search_name'),
             app=settings.get('app'),
             owner=settings.get('owner'),
             results_link=settings.get('results_link'),
-            result=settings.get('result'),
-            raw_data=raw_data,
-            hipchat_notify=hipchat_notify,
-            settings=settings
+            result=result,
         )
         user_agent = settings['configuration'].get('user_agent', 'Splunk')
         if not send_webhook_request(url, headers, json.dumps(body), user_agent=user_agent):
