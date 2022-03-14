@@ -1,0 +1,37 @@
+<form
+  class="form-horizontal form-complex"
+  style="display: flex; flex-direction: column; justify-content: center; align-items: center"
+>
+  <div class="control-group" style="align-items: center">
+    <label class="control-label" for="webhook_url">URL</label>
+    <div class="controls">
+      <input
+        type="text"
+        class="input-xlarge"
+        name="action.custom_webhook.param.url"
+        id="webhook_url"
+        placeholder="https://your.server.com/foo/bar"
+      />
+    </div>
+    <label class="control-label" for="webhook_headers">Headers dict</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" name="action.custom_webhook.param.headers" id="webhook_headers" />
+    </div>
+  </div>
+  <span class="help-block" style="display: block; position: static; width: auto; margin-left: 0">
+    JSON strings: for example <code>{"Authorization": "Bearer 1234567890"}</code>
+  </span>
+
+  <div class="control-group" style="margin-top: 4px">
+    <div class="controls">
+      <label class="checkbox" for="webhook_raw_data">
+        <input type="checkbox" name="action.custom_webhook.param.raw_data" id="webhook_raw_data" value="1" />
+        Forward as is
+      </label>
+    </div>
+    <span class="help-block" style="display: block; position: static; width: auto; margin-left: 0">
+      If checked, will forward the search results as is, without any modification. if not checked, will forward the
+      search results in a property named 'result', with some additional flat data.
+    </span>
+  </div>
+</form>
